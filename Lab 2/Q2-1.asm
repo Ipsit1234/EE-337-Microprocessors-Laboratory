@@ -1,0 +1,38 @@
+ORG 0H;
+LJMP MAIN;
+MAIN:
+	MOV 60H, #9D;
+	MOV 61H, #8D;
+	MOV 62H, #7D;
+	MOV 63H, #6D;
+	MOV 64H, #5D;
+	MOV 65H, #4D;
+	MOV 66H, #3D;
+	MOV 67H, #2D;
+;	MOV 68H, #13D;
+;	MOV 69H, #14D;
+	LCALL MEMCPY;
+	NOP;
+	HERE: SJMP HERE;
+MEMCPY: MOV 50H, #8D; N
+		MOV 51H, #60H; M1
+		MOV 52H, #65H; M2
+		MOV R0, 51H;
+		MOV R1, 52H;
+		MOV A, 50H;
+		ADD A, R0; A = M1 + N
+		PUSH_N_JUMP: MOV 03H, @R0;
+					 PUSH 03H;
+					 INC R0;
+					 CJNE A, 0H, PUSH_N_JUMP;
+		MOV A, R1;
+		ADD A, 50H; A = M2 + N 
+		MOV R1, A; R1 = M2 + N
+		MOV A, 52H; A = M2
+		POP_N_JUMP: POP 04H
+					DEC R1;
+					MOV @R1, 04H;
+					CJNE A, 01H, POP_N_JUMP;
+		RET;
+		
+	END;

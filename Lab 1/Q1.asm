@@ -1,0 +1,14 @@
+ORG 0H;
+LJMP MAIN;
+
+MAIN: 
+	  MOV 70H, #11H;
+	  MOV 71H, #0F1H;
+	  MOV A, 70H;
+	  ADD A, 71H;
+	  MOV 72H, A;
+	  JC CARRY
+	  MOV 73H, #00H;
+	  CARRY: MOV 73H, #01H;
+	  HERE: SJMP HERE
+	  END;
