@@ -1,0 +1,7 @@
+remote_theme: pages-themes/dinky@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
+
+title: EE 337 - Microprocessors Lab
+description: My solutions to the assignments of this lab.
+show_downloads: true
